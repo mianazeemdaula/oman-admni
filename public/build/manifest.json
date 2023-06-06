@@ -1,0 +1,51 @@
+{
+  "public/images/sort_both.png": {
+    "file": "assets/sort_both.3e016c23.png",
+    "src": "public/images/sort_both.png"
+  },
+  "public/images/sort_asc.png": {
+    "file": "assets/sort_asc.595704c3.png",
+    "src": "public/images/sort_asc.png"
+  },
+  "public/images/sort_desc.png": {
+    "file": "assets/sort_desc.d08ed0e2.png",
+    "src": "public/images/sort_desc.png"
+  },
+  "public/images/sort_asc_disabled.png": {
+    "file": "assets/sort_asc_disabled.6c0f0c1b.png",
+    "src": "public/images/sort_asc_disabled.png"
+  },
+  "public/images/sort_desc_disabled.png": {
+    "file": "assets/sort_desc_disabled.a65b8f4f.png",
+    "src": "public/images/sort_desc_disabled.png"
+  },
+  "node_modules/bootstrap-icons/font/fonts/bootstrap-icons.woff2": {
+    "file": "assets/bootstrap-icons.cfe45b98.woff2",
+    "src": "node_modules/bootstrap-icons/font/fonts/bootstrap-icons.woff2"
+  },
+  "node_modules/bootstrap-icons/font/fonts/bootstrap-icons.woff": {
+    "file": "assets/bootstrap-icons.999550fa.woff",
+    "src": "node_modules/bootstrap-icons/font/fonts/bootstrap-icons.woff"
+  },
+  "resources/js/app.js": {
+    "file": "assets/app.7b630502.js",
+    "src": "resources/js/app.js",
+    "isEntry": true,
+    "css": [
+      "assets/app.82ad59fb.css"
+    ],
+    "assets": [
+      "assets/bootstrap-icons.cfe45b98.woff2",
+      "assets/bootstrap-icons.999550fa.woff"
+    ]
+  },
+  "resources/css/app.css": {
+    "file": "assets/app.13879b6e.css",
+    "src": "resources/css/app.css",
+    "isEntry": true
+  },
+  "resources/js/app.css": {
+    "file": "assets/app.82ad59fb.css",
+    "src": "resources/js/app.css"
+  }
+}
