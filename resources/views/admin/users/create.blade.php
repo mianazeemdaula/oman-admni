@@ -164,7 +164,7 @@
 @endsection
 
 @section('js')
-    <script>
+    <script type="module">
         function previewImage1(event) {
             const preview = document.getElementById('preview1');
             var file = $("#preview1Input").get(0).files[0];
@@ -190,8 +190,6 @@
                 reader.readAsDataURL(file);
             }
         }
-    </script>
-    <script type="module">
 
         $("#city").change(function() {
             var cityId = $(this).find(':selected').data('id');

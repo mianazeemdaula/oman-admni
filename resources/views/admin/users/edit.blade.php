@@ -4,23 +4,25 @@
         <span class="bi bi-rocket text-2xl"></span>
         <h2 class="text-xl">Building</h2>
     </div>
-    <form action="{{ route('buildings.store') }}" method="post" enctype="multipart/form-data">
+    <form action="{{ route('buildings.update', $building->id) }}" method="post" enctype="multipart/form-data">
         @csrf
+        @method('put')
         <div class="mt-4 bg-white">
             <div class="bg-blue-500  p-2">
-                <h2 class="text-white">Add New Building</h2>
+                <h2 class="text-white">Edit Building</h2>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 p-2 gap-2 md:p-4">
                 <div>
                     <h3 class="p-1">Type</h3>
-                    <input type="text" placeholder="Type" name="type" value="{{ old('type') }}" class="w-80">
+                    <input type="text" placeholder="Type" name="type" value="{{ $building->type }}" class="w-80">
                     @error('type')
                         <p class="text-red-500 text-xs italic">{{ $message }}</p>
                     @enderror
                 </div>
                 <div>
                     <h3 class="p-1">How Own</h3>
-                    <input type="text" placeholder="How Own" name="how_own" value="{{ old('how_own') }}" class="w-80">
+                    <input type="text" placeholder="How Own" name="how_own" value="{{ $building->how_own }}"
+                        class="w-80">
                     @error('how_own')
                         <p class="text-red-500 text-xs italic">{{ $message }}</p>
                     @enderror
@@ -28,7 +30,7 @@
                 <div>
                     <h3 class="p-1">Property Image</h3>
                     <label for="preview1Input" class="relative">
-                        <img src="https://ui-avatars.com/api/?name=Axy+Boe" alt="image" class="rounded-md w-10 h-10">
+                        <img src="{{ $building->property_image }}" alt="image" class="rounded-md w-10 h-10">
                         <img id="preview1" src="#" alt="Preview"
                             class="absolute inset-0 w-10 h-10 object-cover rounded-md opacity-0">
                         <input type="file" id="preview1Input" name="property_image" accept="image/*" class="hidden"
@@ -40,7 +42,7 @@
                 </div>
                 <div>
                     <h3 class="p-1">From When</h3>
-                    <input type="text" placeholder="From When" name="from_when" value="{{ old('from_when') }}"
+                    <input type="text" placeholder="From When" name="from_when" value="{{ $building->from_when }}"
                         class="w-80">
                     @error('from_when')
                         <p class="text-red-500 text-xs italic">{{ $message }}</p>
@@ -48,7 +50,7 @@
                 </div>
                 <div>
                     <h3 class="p-1">Room Number</h3>
-                    <input type="text" placeholder="Room Number" name="room_number" value="{{ old('room_number') }}"
+                    <input type="text" placeholder="Room Number" name="room_number" value="{{ $building->room_number }}"
                         class="w-80">
                     @error('room_number')
                         <p class="text-red-500 text-xs italic">{{ $message }}</p>
@@ -56,36 +58,22 @@
                 </div>
                 <div>
                     <h3 class="p-1">Area</h3>
-                    <input type="text" placeholder="Area" name="area" value="{{ old('area') }}" class="w-80">
+                    <input type="text" placeholder="Area" name="area" value="{{ $building->area }}" class="w-80">
                     @error('area')
                         <p class="text-red-500 text-xs italic">{{ $message }}</p>
                     @enderror
                 </div>
                 <div>
                     <h3 class="p-1">Dimensions</h3>
-                    <input type="text" placeholder="Dimensions" name="dimensions" value="{{ old('dimensions') }}"
+                    <input type="text" placeholder="Dimensions" name="dimensions" value="{{ $building->dimensions }}"
                         class="w-80">
                     @error('dimensions')
                         <p class="text-red-500 text-xs italic">{{ $message }}</p>
                     @enderror
                 </div>
                 <div>
-                    <h3 class="p-1">City</h3>
-                    <select name="city" id="city" class="w-80">
-                        @foreach ($cities as $item)
-                            <option data-id="{{ $item->id }}" value="{{ $item->name }}">{{ $item->name }}
-                            </option>
-                        @endforeach
-                    </select>
-                    @error('city')
-                        <p class="text-red-500 text-xs italic">{{ $message }}</p>
-                    @enderror
-                </div>
-                <div>
                     <h3 class="p-1">State</h3>
-                    <select name="state" id="state" class="w-80">
-
-                    </select>
+                    <input type="text" placeholder="State" name="state" value="{{ $building->state }}" class="w-80">
                     @error('state')
                         <p class="text-red-500 text-xs italic">{{ $message }}</p>
                     @enderror
@@ -93,7 +81,7 @@
                 <div>
                     <h3 class="p-1">Resotration Date</h3>
                     <input type="date" placeholder="Restoration Date" name="restoration_date"
-                        value="{{ old('restoration_date') }}" class="w-80">
+                        value="{{ $building->restoration_date }}" class="w-80">
                     @error('restoration_date')
                         <p class="text-red-500 text-xs italic">{{ $message }}</p>
                     @enderror
@@ -101,7 +89,7 @@
                 <div>
                     <h3 class="p-1">Image</h3>
                     <label for="avatar" class="relative">
-                        <img src="https://ui-avatars.com/api/?name=Axy+Boe" alt="image" class="rounded-md w-10 h-10">
+                        <img src="{{ $building->image }}" alt="image" class="rounded-md w-10 h-10">
                         <img id="preview" src="#" alt="Preview"
                             class="absolute inset-0 w-10 h-10 object-cover rounded-md opacity-0">
                         <input type="file" id="avatar" name="image" accept="image/*" class="hidden"
@@ -111,14 +99,18 @@
                         <p class="text-red-500 text-xs italic">{{ $message }}</p>
                     @enderror
                 </div>
-
+                <div>
+                    <h3 class="p-1">City</h3>
+                    <input type="text" placeholder="City" name="city" value="{{ $building->city }}"
+                        class="w-80">
+                    @error('city')
+                        <p class="text-red-500 text-xs italic">{{ $message }}</p>
+                    @enderror
+                </div>
                 <div>
                     <h3 class="p-1">Building State</h3>
-                    <select name="building_status" id="" class="w-80">
-                        @foreach (config('data.structural_conditions') as $item)
-                            <option value="{{ $item }}">{{ $item }}</option>
-                        @endforeach
-                    </select>
+                    <input type="text" placeholder="Building State" name="building_status"
+                        value="{{ $building->building_status }}" class="w-80">
                     @error('building_status')
                         <p class="text-red-500 text-xs italic">{{ $message }}</p>
                     @enderror
@@ -126,14 +118,14 @@
                 <div>
                     <h3 class="p-1">Neighborhood</h3>
                     <input type="text" placeholder="Neighborhood" name="neighborhood"
-                        value="{{ old('neighborhood') }}" class="w-80">
+                        value="{{ $building->neighborhood }}" class="w-80">
                     @error('neighborhood')
                         <p class="text-red-500 text-xs italic">{{ $message }}</p>
                     @enderror
                 </div>
                 <div>
                     <h3 class="p-1">Status</h3>
-                    <input type="text" placeholder="Status" name="status" value="{{ old('status') }}"
+                    <input type="text" placeholder="Status" name="status" value="{{ $building->status }}"
                         class="w-80">
                     @error('status')
                         <p class="text-red-500 text-xs italic">{{ $message }}</p>
@@ -141,7 +133,7 @@
                 </div>
                 <div>
                     <h3 class="p-1">Village</h3>
-                    <input type="text" placeholder="Village" name="village" value="{{ old('village') }}"
+                    <input type="text" placeholder="Village" name="village" value="{{ $building->village }}"
                         class="w-80">
                     @error('village')
                         <p class="text-red-500 text-xs italic">{{ $message }}</p>
@@ -149,8 +141,8 @@
                 </div>
                 <div>
                     <h3 class="p-1">Location</h3>
-                    <input id="location" type="text" placeholder="Location" name="location"
-                        value="{{ old('location') }}" class="w-80" readonly>
+                    <input type="text" placeholder="Location" name="location" value="{{ $building->location }}"
+                        class="w-80">
                     @error('location')
                         <p class="text-red-500 text-xs italic">{{ $message }}</p>
                     @enderror
@@ -190,45 +182,5 @@
                 reader.readAsDataURL(file);
             }
         }
-    </script>
-    <script type="module">
-
-        $("#city").change(function() {
-            var cityId = $(this).find(':selected').data('id');
-            axios.get("/getStates/" + cityId)
-                .then(response => {
-                    var state = $('#state');
-                    state.empty();
-                    response.data.forEach(category => {
-                        const option = document.createElement('option');
-                        option.value = category.id;
-                        option.text = category.name;
-                        state.append(option);
-                    });
-                    if (response.data.length > 0) {
-                        state.value = response.data[0].id;
-                    }
-                })
-                .catch(error => {
-                    console.log(error);
-                });
-        });
-
-        $('#location').click(function(){
-            axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(function(s){
-                    console.log(s);
-                    var url = "https://maps.googleapis.com/maps/api/geocode/json?latlng="+s.coords.latitude+","+s.coords.longitude+"&key=AIzaSyClNPDJtrM_laLZ48My1P3DVihZkEy9qEU";
-                    axios.get(url).then((r)=>{
-                        var res = r.results[0]['formatted_address'];
-                        $(this).val(res);
-                        console.log(res);
-                    })
-                });
-            } else {
-                alert("Geolocation is not supported by this browser.");
-            }
-        });
     </script>
 @endsection

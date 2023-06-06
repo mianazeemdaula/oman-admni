@@ -25,11 +25,13 @@
                     active="{{ str_contains(request()->url(), 'collectables') }}" url="{{ url('/collectables') }}" />
                 <x-menu-item title="Buildings" icon="bi-building"
                     active="{{ str_contains(request()->url(), 'buildings') }}" url="{{ url('/buildings') }}" />
-                <x-menu-item title="Users" icon="bi-snow" active="false" url="" />
-                <x-menu-item title="Orgnaizations" icon="bi-shop-window" active="false" url="" />
-                <x-menu-item title="Admin User" icon="bi-snow2" active="false" url="" />
+                <x-menu-item title="Users" icon="bi-person" active="{{ str_contains(request()->url(), 'users') }}"
+                    url="{{ url('/users') }}" />
+                <x-menu-item title="Admin User" icon="bi-gear" active="{{ str_contains(request()->url(), 'admins') }}"
+                    url="{{ url('/admins') }}" />
+                <x-menu-item title="Organizations" icon="bi-gear"
+                    active="{{ str_contains(request()->url(), 'organizations') }}" url="{{ url('/organizations') }}" />
                 <x-menu-item title="Collector" icon="bi-snow2" active="false" url="" />
-                <x-menu-item title="Architectural" icon="bi-snow2" active="false" url="" />
                 <x-menu-item title="Architectural" icon="bi-snow2" active="false" url="" />
                 <x-menu-item title="Registration Certificate" icon="bi-snow2" active="false" url="" />
                 <x-menu-item title="Exit Permit" icon="bi-snow2" active="false" url="" />
