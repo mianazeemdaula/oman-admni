@@ -15,8 +15,11 @@
                 @endforeach
             </div>
         </div>
-        <img src="https://ui-avatars.com/api/?name=John+Doe" alt="" srcset=""
-            class="rounded-full w-10 h-10">
+        <div class="flex items-center space-x-2">
+            <div>{{ auth()->user()->username }}</div>
+            <img src="https://ui-avatars.com/api/?name={{ auth()->user()->username }}" alt="" srcset=""
+                class="rounded-full w-10 h-10">
+        </div>
     </div>
     <div class="border-b-2 my-2"></div>
 </div>

@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Models\Building;
-use App\Models\City;
+use App\Models\News;
+use App\Models\NewsImage;
 use Image;
 
-class BuildingController extends Controller
+class NewsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +17,8 @@ class BuildingController extends Controller
      */
     public function index()
     {
-        $collection = Building::all();
-        return view('admin.buildings.index', compact('collection'));
+        $collection = News::all();
+        return view('admin.news.index', compact('collection'));
     }
 
     /**
@@ -28,8 +28,7 @@ class BuildingController extends Controller
      */
     public function create()
     {
-        $cities = City::all();
-        return view('admin.buildings.create', compact('cities'));
+        return view('admin.news.create');
     }
 
     /**
@@ -41,47 +40,31 @@ class BuildingController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'type' => 'required',
-            'how_own' => 'required',
-            'from_when' => 'required',
-            'room_number' => 'required',
-            'area' => 'required',
-            'dimensions' => 'required',
-            'state' => 'required',
-            'restoration_date' => 'required',   
-            'city' => 'required',   
-            'building_status' => 'required',   
-            'neighborhood' => 'required',
-            'village' => 'required',   
-            'location' => 'required',   
-            'property_image' => 'required',   
-            'image' => 'required',
+            'tittle' => 'required',
+            'body' => 'required',
+            'images' => 'required',
         ]);
         $data = $request->all();
-        $data['user_id'] = auth()->id();
-        // $data['user_id'] = \App\Models\User::wherePhone(91377887)->first()->id;
-        $data['status'] = 'PENDING';
-        $building = Building::create($data);
-        if($request->has('property_image')){
-            $file = $request->property_image;
-            $ext = $file->getClientOriginalExtension();
-            $fileName = time().'.'.$ext;
-            $path = "product/".$fileName;
-            $image = Image::make($file->getRealPath());
-            $image->save($path);
-            $building->property_image = asset($path);
+        $news = new News();
+        $news->tittle = $request->tittle;
+        $news->body = $request->body;
+        $news->save();
+        if($request->has('images')){
+            foreach ($request->images as $img) {
+                $file = $img;
+                $ext = $file->getClientOriginalExtension();
+                $fileName = time().'.'.$ext;
+                $path = "product/".$fileName;
+                $image = Image::make($file->getRealPath());
+                $image->save($path);
+                NewsImage::create([
+                    'image' => asset($path),
+                    'name' => $path,
+                    'news_id' => $news->id
+                ]);
+            }
         }
-        if($request->has('image')){
-            $file = $request->image;
-            $ext = $file->getClientOriginalExtension();
-            $fileName = time().'.'.$ext;
-            $path = "product/".$fileName;
-            $image = Image::make($file->getRealPath());
-            $image->save($path);
-            $building->image = asset($path);
-        }
-        $building->save();
-        return redirect()->route('buildings');
+        return redirect()->route('news');
     }
 
     /**
@@ -92,8 +75,8 @@ class BuildingController extends Controller
      */
     public function show($id)
     {
-        $model = Building::findOrFail($id);
-        return view('admin.buildings.view', compact('model'));
+        $model = News::findOrFail($id);
+        return view('admin.news.view', compact('model'));
     }
 
     /**
@@ -104,8 +87,8 @@ class BuildingController extends Controller
      */
     public function edit($id)
     {
-        $building = Building::findOrFail($id);
-        return view('admin.buildings.edit', compact('building'));
+        $news = News::findOrFail($id);
+        return view('admin.news.edit', compact('news'));
     }
 
     /**
@@ -136,7 +119,7 @@ class BuildingController extends Controller
             'image' => 'required',
         ]);
         $data = $request->all();
-        $building = Building::find($id)->update($data);
+        $building = News::find($id)->update($data);
         if($request->has('property_image')){
             $file = $request->property_image;
             $ext = $file->getClientOriginalExtension();
@@ -156,7 +139,7 @@ class BuildingController extends Controller
             $building->image = asset($path);
         }
         $building->save();
-        return redirect()->route('buildings');
+        return redirect()->route('news');
     }
 
     /**
@@ -167,7 +150,7 @@ class BuildingController extends Controller
      */
     public function destroy($id)
     {
-        Building::find($id)->delete();
+        News::find($id)->delete();
         return redirect()->back();
     }
 }

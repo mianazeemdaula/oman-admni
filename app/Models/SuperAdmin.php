@@ -6,6 +6,7 @@ use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use GoldSpecDigital\LaravelEloquentUUID\Foundation\Auth\User as Authenticatable;
+use GoldSpecDigital\LaravelEloquentUUID\Database\Eloquent\Uuid;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
 /**
@@ -20,7 +21,7 @@ class SuperAdmin extends Authenticatable
 {
     // use SoftDeletes;
 
-    use HasFactory,HasApiTokens;
+    use HasFactory,HasApiTokens,  Uuid;
 
     public $table = 'super_admins';
     
@@ -58,10 +59,10 @@ class SuperAdmin extends Authenticatable
 
     ];
 
-    public function setPasswordAttribute($password)
-    {
-        $this->attributes['password'] = bcrypt($password);
-    }
+    // public function setPasswordAttribute($password)
+    // {
+    //     $this->attributes['password'] = bcrypt($password);
+    // }
 
     
 }

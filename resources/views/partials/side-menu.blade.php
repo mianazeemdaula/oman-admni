@@ -41,7 +41,8 @@
                 <x-menu-item title="Waiver request" icon="bi-snow2" active="false" url="" />
                 <x-menu-item title="Modify Account" icon="bi-snow2" active="false" url="" />
                 <x-menu-item title="Modify Enterprise" icon="bi-snow2" active="false" url="" />
-                <x-menu-item title="News" icon="bi-snow2" active="false" url="" />
+                <x-menu-item title="News" icon="bi-gear" active="{{ str_contains(request()->url(), 'news') }}"
+                    url="{{ url('/news') }}" />
                 <x-menu-item title="Featured" icon="bi-snow2" active="false" url="" />
                 <x-menu-item title="Banners" icon="bi-snow2" active="false" url="" />
 
@@ -60,11 +61,13 @@
                     <h1 class="cursor-pointer p-2 hover:bg-gray-700 rounded-md mt-1">Personal</h1>
                     <h1 class="cursor-pointer p-2 hover:bg-gray-700 rounded-md mt-1">Friends</h1>
                 </div> --}}
-                <div
+                <x-menu-item title="Logout" icon="bi-box-arrow-in-right"
+                    active="{{ str_contains(request()->url(), 'logouot') }}" url="{{ url('/logout') }}" />
+                {{-- <div
                     class="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer  hover:bg-blue-600">
                     <i class="bi bi-box-arrow-in-right"></i>
                     <span class="text-[15px] ml-4 text-gray-200">Logout</span>
-                </div>
+                </div> --}}
 
             </div>
         </div>

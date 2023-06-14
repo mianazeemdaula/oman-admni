@@ -101,16 +101,23 @@
                 </div>
                 <div>
                     <h3 class="p-1">City</h3>
-                    <input type="text" placeholder="City" name="city" value="{{ $building->city }}"
-                        class="w-80">
+                    <select name="city" id="city" class="w-80">
+                        @foreach ($cities as $item)
+                            <option data-id="{{ $item->id }}" value="{{ $item->name }}">{{ $item->name }}
+                            </option>
+                        @endforeach
+                    </select>
                     @error('city')
                         <p class="text-red-500 text-xs italic">{{ $message }}</p>
                     @enderror
                 </div>
                 <div>
                     <h3 class="p-1">Building State</h3>
-                    <input type="text" placeholder="Building State" name="building_status"
-                        value="{{ $building->building_status }}" class="w-80">
+                    <select name="building_status" id="" class="w-80">
+                        @foreach (config('data.structural_conditions') as $item)
+                            <option value="{{ $item }}">{{ $item }}</option>
+                        @endforeach
+                    </select>
                     @error('building_status')
                         <p class="text-red-500 text-xs italic">{{ $message }}</p>
                     @enderror
@@ -141,8 +148,8 @@
                 </div>
                 <div>
                     <h3 class="p-1">Location</h3>
-                    <input type="text" placeholder="Location" name="location" value="{{ $building->location }}"
-                        class="w-80">
+                    <input type="text" id="location" placeholder="Location" name="location"
+                        value="{{ $building->location }}" class="w-80">
                     @error('location')
                         <p class="text-red-500 text-xs italic">{{ $message }}</p>
                     @enderror
@@ -183,4 +190,44 @@
             }
         }
     </script>
+
+    <script type="module">
+    $("#city").change(function() {
+        var cityId = $(this).find(':selected').data('id');
+        axios.get("/getStates/" + cityId)
+            .then(response => {
+                var state = $('#state');
+                state.empty();
+                response.data.forEach(category => {
+                    const option = document.createElement('option');
+                    option.value = category.id;
+                    option.text = category.name;
+                    state.append(option);
+                });
+                if (response.data.length > 0) {
+                    state.value = response.data[0].id;
+                }
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    });
+
+    $('#location').click(function(){
+        axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(s){
+                console.log(s);
+                var url = "https://maps.googleapis.com/maps/api/geocode/json?latlng="+s.coords.latitude+","+s.coords.longitude+"&key=AIzaSyClNPDJtrM_laLZ48My1P3DVihZkEy9qEU";
+                axios.get(url).then((r)=>{
+                    var res = r.results[0]['formatted_address'];
+                    $(this).val(res);
+                    console.log(res);
+                })
+            });
+        } else {
+            alert("Geolocation is not supported by this browser.");
+        }
+    });
+</script>
 @endsection

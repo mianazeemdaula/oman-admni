@@ -192,7 +192,6 @@
         }
     </script>
     <script type="module">
-
         $("#city").change(function() {
             var cityId = $(this).find(':selected').data('id');
             axios.get("/getStates/" + cityId)
