@@ -19,7 +19,7 @@ Route::get('/', function () {
 Route::post('login', [LoginController::class,'doLogin']);
 Route::get('logout', [LoginController::class,'logout']);
 
-// Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth'])->group(function () {
     
     Route::get('/dashboard',[HomeController::class,'index'] );
 
@@ -45,6 +45,6 @@ Route::get('logout', [LoginController::class,'logout']);
     Route::resource('news', NewsController::class)->names([
         'index' => 'news'
     ]);
-// });
+});
 
 Route::get('getStates/{id}',[CityController::class, 'getStates']);
