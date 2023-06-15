@@ -11,11 +11,11 @@
 
 <body class="font-[Poppins] bg-gray-100">
     <div class="flex">
-        <div class="w-1/5">
+        <div class="w-1/5 hidden md:block">
             <!-- Side Menu -->
             @include('partials.side-menu')
         </div>
-        <div class="flex-1">
+        <div class="flex-1 overflow-x-auto">
             <!-- Top Menu -->
             @include('partials.top-menu')
             <!-- Content -->
