@@ -10,9 +10,11 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\OrganizationController;
 use App\Http\Controllers\SellController;
-use App\Http\Controllers\WeiverController;
+use App\Http\Controllers\WaiverController;
+use App\Http\Controllers\DedicateController;
 use App\Http\Controllers\ExitCountryController;
 use App\Http\Controllers\LoanController;
+use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\CityController;
 
@@ -49,6 +51,8 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('sells', SellController::class)->names([
         'index' => 'sells'
     ]);
+    Route::get('gifts', [SellController::class, 'getGifts'])->name('gifts');
+    
 
     Route::resource('exits', ExitCountryController::class)->names([
         'index' => 'exits'
@@ -57,12 +61,18 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('loans', LoanController::class)->names([
         'index' => 'loans'
     ]);
-    Route::resource('weivers', WeiverController::class)->names([
-        'index' => 'weivers'
+    Route::resource('waivers', WaiverController::class)->names([
+        'index' => 'waivers'
     ]);
-
+    Route::resource('dedicates', DedicateController::class)->names([
+        'index' => 'dedicates'
+    ]);
+    
     Route::resource('news', NewsController::class)->names([
         'index' => 'news'
+    ]);
+    Route::resource('certificates', CertificateController::class)->names([
+        'index' => 'certificates'
     ]);
 });
 

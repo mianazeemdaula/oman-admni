@@ -8,7 +8,7 @@ use App\Models\Sell;
 use App\Models\NewsImage;
 use Image;
 
-class WeiverController extends Controller
+class WaiverController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,7 +18,7 @@ class WeiverController extends Controller
     public function index()
     {
         $collection = Sell::where('status','PENDING')->where('type','طلب تنازل')->get();
-        return view('admin.sells.index', compact('collection'));
+        return view('admin.waivers.index', compact('collection'));
     }
 
     /**
@@ -28,7 +28,7 @@ class WeiverController extends Controller
      */
     public function create()
     {
-        return view('admin.sells.create');
+        return view('admin.waivers.create');
     }
 
     /**
@@ -76,7 +76,7 @@ class WeiverController extends Controller
     public function show($id)
     {
         $model = Sell::findOrFail($id);
-        return view('admin.news.view', compact('model'));
+        return view('admin.waivers.view', compact('model'));
     }
 
     /**
@@ -88,7 +88,7 @@ class WeiverController extends Controller
     public function edit($id)
     {
         $news = Sell::findOrFail($id);
-        return view('admin.sells.edit', compact('news'));
+        return view('admin.waivers.edit', compact('news'));
     }
 
     /**

@@ -13,8 +13,10 @@ import 'datatables.net-buttons/js/buttons.colVis.mjs';
 
 import JSZip from 'jszip';
 import * as pdfFonts from "pdfmake/build/vfs_fonts.js";
-import pdfMake from 'pdfmake';
-pdfMake.vfs = pdfFonts.pdfMake.vfs;
+// import pdfFonts from "pdfmake/build/vfs_fonts";
+
+// import "pdfmake/build/pdfmake";
+// const pdfMake = window["pdfMake"];
 
 // pdfMake.fonts = {
 //     Roboto: {
@@ -24,6 +26,8 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 //         bolditalics: "https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.66/fonts/Roboto/Roboto-MediumItalic.ttf",
 //     },
 // };
+import pdfMake from 'pdfmake';
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 
 window.DataTable.Buttons.jszip(JSZip);

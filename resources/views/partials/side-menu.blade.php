@@ -29,20 +29,22 @@
                     url="{{ url('/users') }}" />
                 <x-menu-item title="Admin User" icon="bi-gear" active="{{ str_contains(request()->url(), 'admins') }}"
                     url="{{ url('/admins') }}" />
-                <x-menu-item title="Organizations" icon="bi-gear"
+                <x-menu-item title="Organizations" icon="bi-building-gear"
                     active="{{ str_contains(request()->url(), 'organizations') }}" url="{{ url('/organizations') }}" />
                 <x-menu-item title="Collector" icon="bi-snow2" active="false" url="" />
                 <x-menu-item title="Architectural" icon="bi-snow2" active="false" url="" />
-                <x-menu-item title="Registration Certificate" icon="bi-snow2" active="false" url="" />
-                <x-menu-item title="Exit Permit" icon="bi-gear" active="{{ str_contains(request()->url(), 'exits') }}"
-                    url="{{ url('/exits') }}" />
-                <x-menu-item title="Sell Order" icon="bi-gear" active="{{ str_contains(request()->url(), 'sells') }}"
+                <x-menu-item title="Certificates" icon="bi-award"
+                    active="{{ str_contains(request()->url(), 'certificates') }}" url="{{ url('/certificates') }}" />
+                <x-menu-item title="Exit Permit" icon="bi-fullscreen-exit"
+                    active="{{ str_contains(request()->url(), 'exits') }}" url="{{ url('/exits') }}" />
+                <x-menu-item title="Sell Order" icon="bi-bag" active="{{ str_contains(request()->url(), 'sells') }}"
                     url="{{ url('/sells') }}" />
-                <x-menu-item title="Loan Request" icon="bi-gear" active="{{ str_contains(request()->url(), 'loans') }}"
+                <x-menu-item title="Loan Request" icon="bi-bank" active="{{ str_contains(request()->url(), 'loans') }}"
                     url="{{ url('/loans') }}" />
-                <x-menu-item title="Gift request" icon="bi-snow2" active="false" url="" />
-                <x-menu-item title="Weivers Request" icon="bi-gear"
-                    active="{{ str_contains(request()->url(), 'weivers') }}" url="{{ url('/weivers') }}" />
+                <x-menu-item title="Gift Request" icon="bi-gift" active="{{ str_contains(request()->url(), 'gifts') }}"
+                    url="{{ url('/gifts') }}" />
+                <x-menu-item title="Waivers Request" icon="bi-cart-x"
+                    active="{{ str_contains(request()->url(), 'waivers') }}" url="{{ url('/waivers') }}" />
                 <x-menu-item title="Modify Account" icon="bi-snow2" active="false" url="" />
                 <x-menu-item title="Modify Enterprise" icon="bi-snow2" active="false" url="" />
                 <x-menu-item title="News" icon="bi-gear" active="{{ str_contains(request()->url(), 'news') }}"

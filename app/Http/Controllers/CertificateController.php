@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Models\Sell;
+use App\Models\Ask;
 use App\Models\NewsImage;
 use Image;
 
-class SellController extends Controller
+class CertificateController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +17,8 @@ class SellController extends Controller
      */
     public function index()
     {
-        $collection = Sell::whereStatus('PENDING')->whereType('طلب بيع')->get();
-        return view('admin.sells.index', compact('collection'));
+        $collection = Ask::where('status','PENDING')->where('name','certificate')->get();
+        return view('admin.certificates.index', compact('collection'));
     }
 
     /**
@@ -134,11 +134,5 @@ class SellController extends Controller
     {
         Sell::find($id)->delete();
         return redirect()->back();
-    }
-
-    public function getGifts()
-    {
-        $collection = Sell::whereStatus('PENDING')->whereType('طلب اهداء')->get();
-        return view('admin.gifts.index', compact('collection'));
     }
 }

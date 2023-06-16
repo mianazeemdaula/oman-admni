@@ -8,7 +8,7 @@ use App\Models\Sell;
 use App\Models\NewsImage;
 use Image;
 
-class SellController extends Controller
+class DedicateController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +17,8 @@ class SellController extends Controller
      */
     public function index()
     {
-        $collection = Sell::whereStatus('PENDING')->whereType('طلب بيع')->get();
-        return view('admin.sells.index', compact('collection'));
+        $collection = Sell::where('status','PENDING')->where('type','طلب اهداء')->get();
+        return view('admin.dedicated.index', compact('collection'));
     }
 
     /**
@@ -134,11 +134,5 @@ class SellController extends Controller
     {
         Sell::find($id)->delete();
         return redirect()->back();
-    }
-
-    public function getGifts()
-    {
-        $collection = Sell::whereStatus('PENDING')->whereType('طلب اهداء')->get();
-        return view('admin.gifts.index', compact('collection'));
     }
 }
