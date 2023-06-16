@@ -108,6 +108,10 @@ class User extends Authenticatable
         
     ];
 
+    function getNameAttribute() {
+      return $this->first_name." ".$this->second_name." ".$this->third_name;
+    }
+
     public function items()
     {
        return $this->hasMany(Item::class,'user_id');

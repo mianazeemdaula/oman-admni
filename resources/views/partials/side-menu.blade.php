@@ -34,11 +34,15 @@
                 <x-menu-item title="Collector" icon="bi-snow2" active="false" url="" />
                 <x-menu-item title="Architectural" icon="bi-snow2" active="false" url="" />
                 <x-menu-item title="Registration Certificate" icon="bi-snow2" active="false" url="" />
-                <x-menu-item title="Exit Permit" icon="bi-snow2" active="false" url="" />
-                <x-menu-item title="Sell Order" icon="bi-snow2" active="false" url="" />
-                <x-menu-item title="loan Request" icon="bi-snow2" active="false" url="" />
+                <x-menu-item title="Exit Permit" icon="bi-gear" active="{{ str_contains(request()->url(), 'exits') }}"
+                    url="{{ url('/exits') }}" />
+                <x-menu-item title="Sell Order" icon="bi-gear" active="{{ str_contains(request()->url(), 'sells') }}"
+                    url="{{ url('/sells') }}" />
+                <x-menu-item title="Loan Request" icon="bi-gear" active="{{ str_contains(request()->url(), 'loans') }}"
+                    url="{{ url('/loans') }}" />
                 <x-menu-item title="Gift request" icon="bi-snow2" active="false" url="" />
-                <x-menu-item title="Waiver request" icon="bi-snow2" active="false" url="" />
+                <x-menu-item title="Weivers Request" icon="bi-gear"
+                    active="{{ str_contains(request()->url(), 'weivers') }}" url="{{ url('/weivers') }}" />
                 <x-menu-item title="Modify Account" icon="bi-snow2" active="false" url="" />
                 <x-menu-item title="Modify Enterprise" icon="bi-snow2" active="false" url="" />
                 <x-menu-item title="News" icon="bi-gear" active="{{ str_contains(request()->url(), 'news') }}"

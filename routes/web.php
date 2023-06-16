@@ -9,6 +9,10 @@ use App\Http\Controllers\BuildingController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\OrganizationController;
+use App\Http\Controllers\SellController;
+use App\Http\Controllers\WeiverController;
+use App\Http\Controllers\ExitCountryController;
+use App\Http\Controllers\LoanController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\CityController;
 
@@ -40,6 +44,21 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('organizations', OrganizationController::class)->names([
         'index' => 'organizations'
+    ]);
+
+    Route::resource('sells', SellController::class)->names([
+        'index' => 'sells'
+    ]);
+
+    Route::resource('exits', ExitCountryController::class)->names([
+        'index' => 'exits'
+    ]);
+
+    Route::resource('loans', LoanController::class)->names([
+        'index' => 'loans'
+    ]);
+    Route::resource('weivers', WeiverController::class)->names([
+        'index' => 'weivers'
     ]);
 
     Route::resource('news', NewsController::class)->names([
