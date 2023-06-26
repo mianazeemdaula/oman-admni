@@ -100,28 +100,18 @@ class ExitCountryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'type' => 'required',
-            'how_own' => 'required',
-            'from_when' => 'required',
-            'room_number' => 'required',
-            'area' => 'required',
-            'dimensions' => 'required',
-            'state' => 'required',
-            'restoration_date' => 'required',   
-            'city' => 'required',   
-            'building_status' => 'required',   
-            'neighborhood' => 'required',   
-            'status' => 'required',   
-            'village' => 'required',   
-            'location' => 'required',   
-            'property_image' => 'required',   
-            'image' => 'required',
-        ]);
-        $data = $request->all();
-        $building = Sell::find($id)->update($data);
-        $building->save();
-        return redirect()->route('sells');
+        if($request->status == 'accept'){    
+            $response = App\Helper\WebClient::post('exit/accept',[
+                'id' => $id
+            ]);
+            return $response->bod();
+        }else{    
+            $response = App\Helper\WebClient::post('exit/reject',[
+                'id' => $id,
+                'reason' => $request->reason,
+            ]);
+            return $response->bod();
+        }
     }
 
     /**

@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Models\Loan;
+use App\Models\Ask;
 use App\Models\NewsImage;
 use Image;
 
-class LoanController extends Controller
+class AskController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +17,8 @@ class LoanController extends Controller
      */
     public function index()
     {
-        $collection = Loan::where('status','PENDING')->get();
-        return view('admin.loans.index', compact('collection'));
+        $collection = Ask::where('status','PENDING')->get();
+        return view('admin.asks.index', compact('collection'));
     }
 
     /**
@@ -28,7 +28,7 @@ class LoanController extends Controller
      */
     public function create()
     {
-        return view('admin.sells.create');
+        return view('admin.asks.create');
     }
 
     /**
@@ -45,7 +45,7 @@ class LoanController extends Controller
             'images' => 'required',
         ]);
         $data = $request->all();
-        $news = new Sell();
+        $news = new Ask();
         $news->tittle = $request->tittle;
         $news->body = $request->body;
         $news->save();
@@ -75,7 +75,7 @@ class LoanController extends Controller
      */
     public function show($id)
     {
-        $model = Loan::findOrFail($id);
+        $model = Sell::findOrFail($id);
         return view('admin.news.view', compact('model'));
     }
 
@@ -87,7 +87,7 @@ class LoanController extends Controller
      */
     public function edit($id)
     {
-        $news = Loan::findOrFail($id);
+        $news = Sell::findOrFail($id);
         return view('admin.sells.edit', compact('news'));
     }
 
@@ -100,20 +100,28 @@ class LoanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $response = null;
-        if($request->status == 'accept'){    
-            $response = \App\Helper\WebClient::post('loan/accept',[
-                'id' => $id
-            ]);
-            $response =  $response->json();
-        }else{    
-            $response = \App\Helper\WebClient::post('loan/reject',[
-                'id' => $id,
-                'reason' => $request->reason,
-            ]);
-            $response =  $response->json();
-        }
-        return  redirect()->back()->with(['alert' => $response['success'] ?? false, 'message' => $response['message'] ]);
+        $request->validate([
+            'type' => 'required',
+            'how_own' => 'required',
+            'from_when' => 'required',
+            'room_number' => 'required',
+            'area' => 'required',
+            'dimensions' => 'required',
+            'state' => 'required',
+            'restoration_date' => 'required',   
+            'city' => 'required',   
+            'building_status' => 'required',   
+            'neighborhood' => 'required',   
+            'status' => 'required',   
+            'village' => 'required',   
+            'location' => 'required',   
+            'property_image' => 'required',   
+            'image' => 'required',
+        ]);
+        $data = $request->all();
+        $building = Sell::find($id)->update($data);
+        $building->save();
+        return redirect()->route('sells');
     }
 
     /**
@@ -126,5 +134,26 @@ class LoanController extends Controller
     {
         Sell::find($id)->delete();
         return redirect()->back();
+    }
+
+    public function statusUpdate(Request $request)
+    {
+        $response = App\Helper\WebClient::post('ask/accept',[
+            'id' => $request->id,
+        ]);
+        return $response;
+    }
+
+    public function reject(Request $request)
+    {
+        $validated = $request->validate([
+            'id' => 'required|exists:asks',
+            'reason'=>'required'
+        ]);
+        $response = App\Helper\WebClient::post('ask/reject',[
+            'id' => $request->id,
+            'reason' => $request->reason,
+        ]);
+        return $response;
     }
 }

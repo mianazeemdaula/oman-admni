@@ -18,7 +18,7 @@ class SellController extends Controller
     public function index()
     {
         $collection = Sell::whereStatus('PENDING')->whereType('طلب بيع')->get();
-        return view('admin.sells.index', compact('collection'));
+        return view('admin.gifts.index', compact('collection'));
     }
 
     /**
@@ -39,32 +39,6 @@ class SellController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'tittle' => 'required',
-            'body' => 'required',
-            'images' => 'required',
-        ]);
-        $data = $request->all();
-        $news = new Sell();
-        $news->tittle = $request->tittle;
-        $news->body = $request->body;
-        $news->save();
-        if($request->has('images')){
-            foreach ($request->images as $img) {
-                $file = $img;
-                $ext = $file->getClientOriginalExtension();
-                $fileName = time().'.'.$ext;
-                $path = "product/".$fileName;
-                $image = Image::make($file->getRealPath());
-                $image->save($path);
-                NewsImage::create([
-                    'image' => asset($path),
-                    'name' => $path,
-                    'news_id' => $news->id
-                ]);
-            }
-        }
-        return redirect()->route('sells');
     }
 
     /**
@@ -100,28 +74,20 @@ class SellController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'type' => 'required',
-            'how_own' => 'required',
-            'from_when' => 'required',
-            'room_number' => 'required',
-            'area' => 'required',
-            'dimensions' => 'required',
-            'state' => 'required',
-            'restoration_date' => 'required',   
-            'city' => 'required',   
-            'building_status' => 'required',   
-            'neighborhood' => 'required',   
-            'status' => 'required',   
-            'village' => 'required',   
-            'location' => 'required',   
-            'property_image' => 'required',   
-            'image' => 'required',
-        ]);
-        $data = $request->all();
-        $building = Sell::find($id)->update($data);
-        $building->save();
-        return redirect()->route('sells');
+        $response = null;
+        if($request->status == 'accept'){    
+            $response = \App\Helper\WebClient::post('sell/accept',[
+                'id' => $id
+            ]);
+            $response =  $response->json();
+        }else{    
+            $response = \App\Helper\WebClient::post('sell/reject',[
+                'id' => $id,
+                'reason' => $request->reason,
+            ]);
+            $response =  $response->json();
+        }
+        return  redirect()->back()->with(['alert' => $response['success'] ?? false, 'message' => $response['message'] ]);
     }
 
     /**

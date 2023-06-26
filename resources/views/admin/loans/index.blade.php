@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 @section('content')
     <div class="flex space-x-2 items-center">
-        <span class="bi bi-gear text-2xl"></span>
+        <span class="bi bi-bank text-2xl"></span>
         <h2 class="text-xl">Loans</h2>
     </div>
     <div class="mt-4 bg-white">
@@ -70,12 +70,18 @@
                                     @endif
                                 </td>
                                 <td class="flex space-x-1">
-                                    <a href="{{ route('exits.show', $item->id) }}"><span class="bi bi-eye"></span></a>
-                                    <a href="{{ route('exits.edit', $item->id) }}"><span class="bi bi-pencil"></span></a>
-                                    <form action="{{ route('exits.destroy', $item->id) }}" method="post">
-                                        @method('delete')
+                                    <form action="{{ route('loans.update', $item->id) }}" method="post">
+                                        @method('put')
                                         @csrf
-                                        <button type="submit"><span class="bi bi-trash"></span></button>
+                                        <input type="hidden" name="status" value="accept">
+                                        <button type="submit"><span class="bi bi-check"></span></button>
+                                    </form>
+                                    <form action="{{ route('loans.update', $item->id) }}" class="rejectForm" method="post">
+                                        @method('put')
+                                        @csrf
+                                        <input type="hidden" name="status" value="reject">
+                                        <input type="hidden" name="reason" class="reason">
+                                        <a class="submitButton"><span class="bi bi-x"></span></a>
                                     </form>
                                 </td>
                             </tr>
@@ -98,6 +104,22 @@
                 ]
             });
 
+            $( document ).on( "click", "a.submitButton", function(){
+                Swal.fire({
+                    title: 'Reason',
+                    input: 'text',
+                    inputPlaceholder: 'Enter the reason',
+                    showCancelButton: true,
+                    confirmButtonText: 'Submit',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        var $form = $(this).closest('form');
+                        var $input = $form.find('.reason');
+                        $input.val(result.value);
+                        $form.submit();
+                    }
+                });
+            });
         });
     </script>
 @endsection

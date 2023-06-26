@@ -24,10 +24,10 @@ class LoginController extends Controller
     public function doLogin(Request $request)
     {
         $credentials = $request->only('username', 'password');
-       $user =  SuperAdmin::where('username', $request->username)->first();
-
+        $user =  SuperAdmin::where('username', $request->username)->first();
        if ($user && Hash::check($request->password, $user->password)) {
            Auth::login($user);
+           session(['token' => $user->createToken('super-admin')->accessToken]);
            return redirect()->intended('dashboard');
         }else{
             return redirect()->back()->withErrors(['username' => 'Credentials not matched.']);

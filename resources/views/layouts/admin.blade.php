@@ -25,6 +25,16 @@
         </div>
     </div>
     @yield('js')
+
+    <script type="module">
+        @if (Session::has('alert'))
+            Swal.fire(
+                "Message Alert",
+                "{{ Session::get('message') }}",
+                "{{ Session::get('alert') ? 'success' : 'error' }}"
+            )
+        @endif
+    </script>
 </body>
 
 </html>

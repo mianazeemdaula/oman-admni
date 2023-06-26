@@ -1,12 +1,12 @@
 @extends('layouts.admin')
 @section('content')
     <div class="flex space-x-2 items-center">
-        <span class="bi bi-gear text-2xl"></span>
-        <h2 class="text-xl">Certificates</h2>
+        <span class="bi bi-gift text-2xl"></span>
+        <h2 class="text-xl">Gifts</h2>
     </div>
     <div class="mt-4 bg-white">
         <div class="bg-blue-500  p-2 flex justify-between">
-            <h2 class="text-white">Certificates</h2>
+            <h2 class="text-white">Gifts</h2>
             {{-- <a class="p-2 bg-white rounded-md text-xs" href="{{ route('sells.create') }}">Add Sell</a> --}}
         </div>
         <div class="px-4 pb-2">
@@ -49,14 +49,15 @@
                                     <form action="{{ route('sells.update', $item->id) }}" method="post">
                                         @method('put')
                                         @csrf
-                                        <input type="hidden" name="status" value="ACCEPTED">
+                                        <input type="hidden" name="status" value="accept">
                                         <button type="submit"><span class="bi bi-check"></span></button>
                                     </form>
-                                    <form action="{{ route('sells.update', $item->id) }}" method="post">
+                                    <form action="{{ route('sells.update', $item->id) }}" class="rejectForm" method="post">
                                         @method('put')
                                         @csrf
-                                        <input type="hidden" name="status" value="REJECTED">
-                                        <button type="submit"><span class="bi bi-x"></span></button>
+                                        <input type="hidden" name="status" value="reject">
+                                        <input type="hidden" name="reason" class="reason">
+                                        <a class="submitButton"><span class="bi bi-x"></span></a>
                                     </form>
                                     {{-- <form action="{{ route('sells.destroy', $item->id) }}" method="post">
                                         @method('delete')
@@ -84,6 +85,22 @@
                 ]
             });
 
+            $( document ).on( "click", "a.submitButton", function(){
+                Swal.fire({
+                    title: 'Reason',
+                    input: 'text',
+                    inputPlaceholder: 'Enter the reason',
+                    showCancelButton: true,
+                    confirmButtonText: 'Submit',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        var $form = $(this).closest('form');
+                        var $input = $form.find('.reason');
+                        $input.val(result.value);
+                        $form.submit();
+                    }
+                });
+            });
         });
     </script>
 @endsection

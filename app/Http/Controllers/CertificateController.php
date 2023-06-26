@@ -100,28 +100,11 @@ class CertificateController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'type' => 'required',
-            'how_own' => 'required',
-            'from_when' => 'required',
-            'room_number' => 'required',
-            'area' => 'required',
-            'dimensions' => 'required',
-            'state' => 'required',
-            'restoration_date' => 'required',   
-            'city' => 'required',   
-            'building_status' => 'required',   
-            'neighborhood' => 'required',   
-            'status' => 'required',   
-            'village' => 'required',   
-            'location' => 'required',   
-            'property_image' => 'required',   
-            'image' => 'required',
+        $response = App\Helper\WebClient::post('ask/reject',[
+            'id' => $id,
+            'reason' => $request->reason,
         ]);
-        $data = $request->all();
-        $building = Sell::find($id)->update($data);
-        $building->save();
-        return redirect()->route('sells');
+        return $response->bod();
     }
 
     /**

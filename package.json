@@ -21,6 +21,7 @@
         "datatables.net-dt": "^1.13.4",
         "jquery": "^3.7.0",
         "jszip": "^3.10.1",
-        "pdfmake": "^0.2.7"
+        "pdfmake": "^0.2.7",
+        "sweetalert2": "^11.7.12"
     }
 }
