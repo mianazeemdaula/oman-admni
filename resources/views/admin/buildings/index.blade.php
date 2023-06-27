@@ -77,6 +77,20 @@
                                         @csrf
                                         <button type="submit"><span class="bi bi-trash"></span></button>
                                     </form>
+                                    <form action="{{ route('buildings.update', $item->id) }}" method="post">
+                                        @method('put')
+                                        @csrf
+                                        <input type="hidden" name="status_ar" value="accept">
+                                        <button type="submit"><span class="bi bi-check"></span></button>
+                                    </form>
+                                    <form action="{{ route('buildings.update', $item->id) }}" class="rejectForm"
+                                        method="post">
+                                        @method('put')
+                                        @csrf
+                                        <input type="hidden" name="status_ar" value="reject">
+                                        <input type="hidden" name="reason" class="reason">
+                                        <a class="submitButton"><span class="bi bi-x"></span></a>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach
@@ -96,6 +110,23 @@
                 buttons: [
                     'copy', 'csv', 'excel', 'pdf', 'print'
                 ]
+            });
+
+            $( document ).on( "click", "a.submitButton", function(){
+                Swal.fire({
+                    title: 'Reason',
+                    input: 'text',
+                    inputPlaceholder: 'Enter the reason',
+                    showCancelButton: true,
+                    confirmButtonText: 'Submit',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        var $form = $(this).closest('form');
+                        var $input = $form.find('.reason');
+                        $input.val(result.value);
+                        $form.submit();
+                    }
+                });
             });
 
         });

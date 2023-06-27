@@ -16,6 +16,7 @@ use App\Http\Controllers\ExitCountryController;
 use App\Http\Controllers\LoanController;
 use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\NewsController;
+use App\Http\Controllers\BannerController;
 use App\Http\Controllers\CityController;
 
 Route::get('/', function () {
@@ -35,6 +36,8 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('buildings', BuildingController::class)->names([
         'index' => 'buildings'
     ]);
+
+    Route::post('buildings-status/{id}',[BuildingController::class,'updateStatus']);
 
     Route::resource('users', UserController::class)->names([
         'index' => 'users'
@@ -73,6 +76,9 @@ Route::middleware(['auth'])->group(function () {
     ]);
     Route::resource('certificates', CertificateController::class)->names([
         'index' => 'certificates'
+    ]);
+    Route::resource('banners', BannerController::class)->names([
+        'index' => 'banners'
     ]);
 });
 

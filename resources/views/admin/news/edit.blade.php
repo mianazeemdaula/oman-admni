@@ -29,7 +29,8 @@
                 <div>
                     <h3 class="p-1">Images</h3>
                     <label for="preview1Input" class="relative">
-                        <img src="{{ $news->images }}" alt="image" class="rounded-md w-10 h-10">
+                        <img src="{{ $news->images[0] ?? 'https://placehold.co/600x400' }}" alt="image"
+                            class="rounded-md w-10 h-10">
                         <img id="preview1" src="#" alt="Preview"
                             class="absolute inset-0 w-10 h-10 object-cover rounded-md opacity-0">
                         <input type="file" id="preview1Input" name="file[]" accept="image/*" multiple="multiple"
@@ -51,10 +52,15 @@
     <script>
         function previewImage1(event) {
             const preview = document.getElementById('preview1');
-            // var file = $("#preview1Input").get(0).files[0];
-            $("#preview1Input").get(0).files.forEach((e) => {
-                console.log(e);
-            });
+            var input = document.getElementById('preview1Input');
+            preview.innerHTML = ''; // Clear the existing file list
+
+            for (var i = 0; i < input.files.length; i++) {
+                var file = input.files[i];
+                var listItem = document.createElement('li');
+                listItem.textContent = file.name;
+                preview.appendChild(listItem);
+            }
             // if (file) {
             //     const reader = new FileReader();
             //     reader.addEventListener('load', function() {

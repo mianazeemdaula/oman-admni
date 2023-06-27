@@ -117,6 +117,22 @@ class BuildingController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if($request->has('status_ar')){
+            $response = null;
+            if($request->status == 'accept'){    
+                $response = \App\Helper\WebClient::post('building/accept',[
+                    'id' => $id
+                ]);
+                $response =  $response->json();
+            }else{    
+                $response = \App\Helper\WebClient::post('building/reject',[
+                    'id' => $id,
+                    'reason' => $request->reason,
+                ]);
+                $response =  $response->json();
+            }
+            return  redirect()->back()->with(['alert' => $response['success'] ?? false, 'message' => $response['message'] ]);
+        }
         $request->validate([
             'type' => 'required',
             'how_own' => 'required',
@@ -170,4 +186,5 @@ class BuildingController extends Controller
         Building::find($id)->delete();
         return redirect()->back();
     }
+
 }

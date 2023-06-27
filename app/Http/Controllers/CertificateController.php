@@ -100,11 +100,20 @@ class CertificateController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $response = App\Helper\WebClient::post('ask/reject',[
-            'id' => $id,
-            'reason' => $request->reason,
-        ]);
-        return $response->bod();
+        $response = null;
+        if($request->status == 'accept'){    
+            $response = \App\Helper\WebClient::post('ask/accept',[
+                'id' => $id
+            ]);
+            $response =  $response->json();
+        }else{    
+            $response = \App\Helper\WebClient::post('ask/reject',[
+                'id' => $id,
+                'reason' => $request->reason,
+            ]);
+            $response =  $response->json();
+        }
+        return  redirect()->back()->with(['alert' => $response['success'] ?? false, 'message' => $response['message'] ]);
     }
 
     /**

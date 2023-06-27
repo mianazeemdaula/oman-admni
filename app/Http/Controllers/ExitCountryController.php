@@ -100,18 +100,20 @@ class ExitCountryController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $response = null;
         if($request->status == 'accept'){    
-            $response = App\Helper\WebClient::post('exit/accept',[
+            $response = \App\Helper\WebClient::post('exit/accept',[
                 'id' => $id
             ]);
-            return $response->bod();
+            $response =  $response->json();
         }else{    
-            $response = App\Helper\WebClient::post('exit/reject',[
+            $response = \App\Helper\WebClient::post('exit/reject',[
                 'id' => $id,
                 'reason' => $request->reason,
             ]);
-            return $response->bod();
+            $response =  $response->json();
         }
+        return  redirect()->back()->with(['alert' => $response['success'] ?? false, 'message' => $response['message'] ]);
     }
 
     /**

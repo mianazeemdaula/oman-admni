@@ -50,7 +50,8 @@
                 <x-menu-item title="News" icon="bi-gear" active="{{ str_contains(request()->url(), 'news') }}"
                     url="{{ url('/news') }}" />
                 <x-menu-item title="Featured" icon="bi-snow2" active="false" url="" />
-                <x-menu-item title="Banners" icon="bi-snow2" active="false" url="" />
+                <x-menu-item title="Banners" icon="bi-bookmark-star-fill"
+                    active="{{ str_contains(request()->url(), 'banners') }}" url="{{ url('/banners') }}" />
 
                 {{-- <div
                     class="p-2.5 mt-2 flex items-center rounded-md px-4 duration-300 cursor-pointer  hover:bg-blue-600">
