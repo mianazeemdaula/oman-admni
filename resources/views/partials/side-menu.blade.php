@@ -45,8 +45,11 @@
                     url="{{ url('/gifts') }}" />
                 <x-menu-item title="Waivers Request" icon="bi-cart-x"
                     active="{{ str_contains(request()->url(), 'waivers') }}" url="{{ url('/waivers') }}" />
-                <x-menu-item title="Modify Account" icon="bi-snow2" active="false" url="" />
-                <x-menu-item title="Modify Enterprise" icon="bi-snow2" active="false" url="" />
+                <x-menu-item title="Modify Account" icon="bi-person-check"
+                    active="{{ str_contains(request()->url(), 'userupdates') }}" url="{{ url('/userupdates') }}" />
+                <x-menu-item title="Modify Enterprise" icon="bi-wallet"
+                    active="{{ str_contains(request()->url(), 'organizationupdate') }}"
+                    url="{{ url('/organizationupdate') }}" />
                 <x-menu-item title="News" icon="bi-gear" active="{{ str_contains(request()->url(), 'news') }}"
                     url="{{ url('/news') }}" />
                 <x-menu-item title="Featured" icon="bi-snow2" active="false" url="" />

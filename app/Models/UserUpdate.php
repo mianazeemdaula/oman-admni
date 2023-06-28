@@ -112,6 +112,10 @@ class UserUpdate extends Model
         'picture' => 'required'
     ];
 
+    function getNameAttribute() {
+        return $this->first_name." ".$this->second_name." ".$this->third_name;
+      }
+
     public function user()
     {
        return $this->belongsTo(User::class);

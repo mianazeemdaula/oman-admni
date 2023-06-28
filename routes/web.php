@@ -7,8 +7,10 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CollectableController;
 use App\Http\Controllers\BuildingController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserUpdateController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\OrganizationController;
+use App\Http\Controllers\OrganizationUpdateController;
 use App\Http\Controllers\SellController;
 use App\Http\Controllers\WaiverController;
 use App\Http\Controllers\DedicateController;
@@ -42,6 +44,10 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('users', UserController::class)->names([
         'index' => 'users'
     ]);
+    Route::resource('userupdates', UserUpdateController::class)->names([
+        'index' => 'userupdates'
+    ]);
+    
 
     Route::resource('admins', AdminController::class)->names([
         'index' => 'admins'
@@ -49,6 +55,9 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('organizations', OrganizationController::class)->names([
         'index' => 'organizations'
+    ]);
+    Route::resource('organizationupdate', OrganizationUpdateController::class)->names([
+        'index' => 'organizationupdate'
     ]);
 
     Route::resource('sells', SellController::class)->names([
