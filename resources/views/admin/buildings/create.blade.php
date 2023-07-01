@@ -214,15 +214,17 @@
         });
 
         $('#location').click(function(){
-            axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(function(s){
                     console.log(s);
-                    var url = "https://maps.googleapis.com/maps/api/geocode/json?latlng="+s.coords.latitude+","+s.coords.longitude+"&key=AIzaSyClNPDJtrM_laLZ48My1P3DVihZkEy9qEU";
-                    axios.get(url).then((r)=>{
-                        var res = r.results[0]['formatted_address'];
-                        $(this).val(res);
-                        console.log(res);
+                    // var url = "https://maps.googleapis.com/maps/api/geocode/json?latlng="+s.coords.latitude+","+s.coords.longitude+"&key=";
+                    axios.post("/api/gmap-getaddress",{
+                        lat: s.coords.latitude,
+                        lan: s.coords.longitude
+                    }).then((r)=>{
+                        console.log(r.data);
+                        $('#location').val(r.data);
+                        // var res = r.results[0]['formatted_address'];
                     })
                 });
             } else {

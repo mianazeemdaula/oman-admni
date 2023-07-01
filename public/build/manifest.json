@@ -3,6 +3,10 @@
     "file": "assets/sort_asc.595704c3.png",
     "src": "public/images/sort_asc.png"
   },
+  "public/images/sort_both.png": {
+    "file": "assets/sort_both.3e016c23.png",
+    "src": "public/images/sort_both.png"
+  },
   "public/images/sort_desc.png": {
     "file": "assets/sort_desc.d08ed0e2.png",
     "src": "public/images/sort_desc.png"
@@ -14,10 +18,6 @@
   "public/images/sort_desc_disabled.png": {
     "file": "assets/sort_desc_disabled.a65b8f4f.png",
     "src": "public/images/sort_desc_disabled.png"
-  },
-  "public/images/sort_both.png": {
-    "file": "assets/sort_both.3e016c23.png",
-    "src": "public/images/sort_both.png"
   },
   "node_modules/bootstrap-icons/font/fonts/bootstrap-icons.woff2": {
     "file": "assets/bootstrap-icons.cfe45b98.woff2",

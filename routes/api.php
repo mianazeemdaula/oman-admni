@@ -17,3 +17,10 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+Route::post('gmap-getaddress', function (Request $request) {
+    // return $request->all();
+    $data = \App\Helper\Helper::getAddress($request->lat, $request->lan);
+    return response()->json($data, 200);
+});

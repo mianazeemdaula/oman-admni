@@ -73,7 +73,9 @@
                 </div>
                 <div>
                     <h3 class="p-1">State</h3>
-                    <input type="text" placeholder="State" name="state" value="{{ $building->state }}" class="w-80">
+                    <select name="state" id="state" class="w-80">
+
+                    </select>
                     @error('state')
                         <p class="text-red-500 text-xs italic">{{ $message }}</p>
                     @enderror
@@ -148,7 +150,7 @@
                 </div>
                 <div>
                     <h3 class="p-1">Location</h3>
-                    <input type="text" id="location" placeholder="Location" name="location"
+                    <input type="text" id="location" placeholder="Location" name="location" readonly
                         value="{{ $building->location }}" class="w-80">
                     @error('location')
                         <p class="text-red-500 text-xs italic">{{ $message }}</p>
@@ -214,20 +216,21 @@
     });
 
     $('#location').click(function(){
-        axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function(s){
-                console.log(s);
-                var url = "https://maps.googleapis.com/maps/api/geocode/json?latlng="+s.coords.latitude+","+s.coords.longitude+"&key=AIzaSyClNPDJtrM_laLZ48My1P3DVihZkEy9qEU";
-                axios.get(url).then((r)=>{
-                    var res = r.results[0]['formatted_address'];
-                    $(this).val(res);
-                    console.log(res);
-                })
-            });
-        } else {
-            alert("Geolocation is not supported by this browser.");
-        }
-    });
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(s){
+                    console.log(s);
+                    axios.post("/api/gmap-getaddress",{
+                        lat: s.coords.latitude,
+                        lan: s.coords.longitude
+                    }).then((r)=>{
+                        console.log(r.data);
+                        $('#location').val(r.data);
+                        // var res = r.results[0]['formatted_address'];
+                    })
+                });
+            } else {
+                alert("Geolocation is not supported by this browser.");
+            }
+        });
 </script>
 @endsection

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Models\Building;
 use App\Models\City;
+use App\Models\State;
 use Image;
 
 class BuildingController extends Controller
@@ -105,7 +106,13 @@ class BuildingController extends Controller
     public function edit($id)
     {
         $building = Building::findOrFail($id);
-        return view('admin.buildings.edit', compact('building'));
+        $cities = City::all();
+        $city = City::where('name', $building->city)->first();
+        $stats = [];
+        if($city){
+            $stats = State::where('city_id', $city->city_id)->get();
+        }
+        return view('admin.buildings.edit', compact('building', 'cities', 'stats'));
     }
 
     /**
