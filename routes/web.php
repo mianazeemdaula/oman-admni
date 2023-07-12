@@ -6,6 +6,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CollectableController;
 use App\Http\Controllers\BuildingController;
+use App\Http\Controllers\ArchitecturalController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserUpdateController;
 use App\Http\Controllers\AdminController;
@@ -37,6 +38,10 @@ Route::middleware(['auth'])->group(function () {
     ]);
     Route::resource('buildings', BuildingController::class)->names([
         'index' => 'buildings'
+    ]);
+
+    Route::resource('architectural', ArchitecturalController::class)->names([
+        'index' => 'architectural'
     ]);
 
     Route::post('buildings-status/{id}',[BuildingController::class,'updateStatus']);

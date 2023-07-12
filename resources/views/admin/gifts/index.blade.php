@@ -34,7 +34,7 @@
                         @foreach ($collection as $item)
                             <tr class="border-b-2">
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                    {{ $item->name }}
+                                    {{ $item->userFrom->name ?? ($item->organizationFrom->name ?? '') }}
                                 </td>
 
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">

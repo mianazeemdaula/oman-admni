@@ -6,11 +6,13 @@
         class="sidebar top-0 bottom-0 lg:left-0 left-[-300px] duration-1000
         p-2 overflow-y-auto text-center bg-gray-900 shadow overflow-x-auto">
         <div class="text-gray-100 text-xl">
-            <div class="p-2.5 mt-1 flex items-center rounded-md ">
-                <i class="bi bi-app-indicator px-2 py-1 bg-blue-600 rounded-md"></i>
-                <h1 class="text-[15px]  ml-3 text-xl text-gray-200 font-bold">Oman</h1>
-                <i class="bi bi-x ml-20 cursor-pointer lg:hidden sidebtn"></i>
-            </div>
+            <a href="{{ url('/dashboard') }}">
+                <div class="p-2.5 mt-1 flex items-center rounded-md ">
+                    <i class="bi bi-app-indicator px-2 py-1 bg-blue-600 rounded-md"></i>
+                    <h1 class="text-[15px]  ml-3 text-xl text-gray-200 font-bold">Oman</h1>
+                    <i class="bi bi-x ml-20 cursor-pointer lg:hidden sidebtn"></i>
+                </div>
+            </a>
             {{-- <hr class="my-2 text-gray-600"> --}}
             <div>
                 {{-- <div
@@ -31,8 +33,11 @@
                     url="{{ url('/admins') }}" />
                 <x-menu-item title="Organizations" icon="bi-building-gear"
                     active="{{ str_contains(request()->url(), 'organizations') }}" url="{{ url('/organizations') }}" />
-                <x-menu-item title="Collector" icon="bi-snow2" active="false" url="" />
-                <x-menu-item title="Architectural" icon="bi-snow2" active="false" url="" />
+                {{-- <x-menu-item title="Collector" icon="bi-snow2" active="false" url="" /> --}}
+
+                <x-menu-item title="Architectural" icon="bi-building"
+                    active="{{ str_contains(request()->url(), 'architectural') }}"
+                    url="{{ url('/architectural') }}" />
                 <x-menu-item title="Certificates" icon="bi-award"
                     active="{{ str_contains(request()->url(), 'certificates') }}" url="{{ url('/certificates') }}" />
                 <x-menu-item title="Exit Permit" icon="bi-fullscreen-exit"
@@ -52,8 +57,8 @@
                     url="{{ url('/organizationupdate') }}" />
                 <x-menu-item title="News" icon="bi-gear" active="{{ str_contains(request()->url(), 'news') }}"
                     url="{{ url('/news') }}" />
-                <x-menu-item title="Featured" icon="bi-snow2" active="false" url="" />
-                <x-menu-item title="Banners" icon="bi-bookmark-star-fill"
+                {{-- <x-menu-item title="Featured" icon="bi-snow2" active="false" url="" /> --}}
+                <x-menu-item title="Featured" icon="bi-bookmark-star-fill"
                     active="{{ str_contains(request()->url(), 'banners') }}" url="{{ url('/banners') }}" />
 
                 {{-- <div

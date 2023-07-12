@@ -7,13 +7,13 @@
         <form action="{{ url('login') }}" method="post">
             @csrf
             <div class="mt-4 bg-white">
-                <div class="bg-blue-500  p-2">
+                <div class="bg-blue-500  p-4">
                     <h2 class="text-white">Login</h2>
                 </div>
                 @if ($errors->any())
                     {!! implode('', $errors->all('<p class="text-red-500 text-xs italic">{{ $message }}</p>')) !!}
                 @endif
-                <div class="grid grid-cols-1 md:grid-cols-1 p-2 gap-2 md:p-4">
+                <div class="grid grid-cols-1 md:grid-cols-1 p-4 gap-2 md:p-8">
                     <div>
                         <h3 class="p-1">Username</h3>
                         <input type="text" placeholder="Username" name="username" value="{{ old('username') }}"

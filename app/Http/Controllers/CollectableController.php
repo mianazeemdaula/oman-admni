@@ -97,7 +97,7 @@ class CollectableController extends Controller
     public function show($id)
     {
         $model = Item::findOrFail($id);
-        return view('admin.buildings.view', compact('model'));
+        return view('admin.collectables.view', compact('model'));
     }
 
     /**
