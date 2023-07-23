@@ -13,19 +13,11 @@
                     <i class="bi bi-x ml-20 cursor-pointer lg:hidden sidebtn"></i>
                 </div>
             </a>
-            {{-- <hr class="my-2 text-gray-600"> --}}
+            <hr class="my-2 text-gray-600">
             <div>
-                {{-- <div
-                    class="p-2.5 my-3 flex items-center rounded-md 
-            px-4 duration-300 cursor-pointer  bg-gray-700">
-                    <i class="bi bi-search text-sm"></i>
-                    <input class="text-[15px] ml-4 w-full bg-transparent focus:outline-none" placeholder="Serach" />
-                </div> --}}
-                {{-- <x-menu-item title="Home" icon="bi-house-door-fill" active="true" />
-                <hr class="my-4 text-gray-600"> --}}
-                <x-menu-item title="Collectable" icon="bi-envelope-fill"
+                <x-menu-item title="Approved collectables" icon="bi-envelope-fill"
                     active="{{ str_contains(request()->url(), 'collectables') }}" url="{{ url('/collectables') }}" />
-                <x-menu-item title="Buildings" icon="bi-building"
+                <x-menu-item title="Approved Architectural" icon="bi-building"
                     active="{{ str_contains(request()->url(), 'buildings') }}" url="{{ url('/buildings') }}" />
                 <x-menu-item title="Users" icon="bi-person" active="{{ str_contains(request()->url(), 'users') }}"
                     url="{{ url('/users') }}" />
@@ -33,6 +25,9 @@
                     url="{{ url('/admins') }}" />
                 <x-menu-item title="Organizations" icon="bi-building-gear"
                     active="{{ str_contains(request()->url(), 'organizations') }}" url="{{ url('/organizations') }}" />
+                <x-menu-item title="Pending collectables" icon="bi-building-gear"
+                    active="{{ str_contains(request()->url(), 'pending-collect') }}"
+                    url="{{ url('/pending-collect') }}" />
                 {{-- <x-menu-item title="Collector" icon="bi-snow2" active="false" url="" /> --}}
 
                 <x-menu-item title="Architectural" icon="bi-building"
@@ -58,7 +53,9 @@
                 <x-menu-item title="News" icon="bi-gear" active="{{ str_contains(request()->url(), 'news') }}"
                     url="{{ url('/news') }}" />
                 {{-- <x-menu-item title="Featured" icon="bi-snow2" active="false" url="" /> --}}
-                <x-menu-item title="Featured" icon="bi-bookmark-star-fill"
+                <x-menu-item title="Gallery" icon="bi-bookmark-star-fill"
+                    active="{{ str_contains(request()->url(), 'gallery') }}" url="{{ url('/gallery') }}" />
+                <x-menu-item title="Banners" icon="bi-bookmark-star-fill"
                     active="{{ str_contains(request()->url(), 'banners') }}" url="{{ url('/banners') }}" />
 
                 {{-- <div

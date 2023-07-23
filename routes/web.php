@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CollectableController;
+use App\Http\Controllers\PendingCollectableController;
 use App\Http\Controllers\BuildingController;
 use App\Http\Controllers\ArchitecturalController;
 use App\Http\Controllers\UserController;
@@ -20,6 +21,7 @@ use App\Http\Controllers\LoanController;
 use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\BannerController;
+use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\CityController;
 
 Route::get('/', function () {
@@ -35,6 +37,9 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('collectables', CollectableController::class)->names([
         'index' => 'collectables'
+    ]);
+    Route::resource('pending-collect', PendingCollectableController::class)->names([
+        'index' => 'pending-collect'
     ]);
     Route::resource('buildings', BuildingController::class)->names([
         'index' => 'buildings'
@@ -94,6 +99,12 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('banners', BannerController::class)->names([
         'index' => 'banners'
     ]);
+
+    Route::resource('gallery', GalleryController::class)->names([
+        'index' => 'gallery'
+    ]);
+
+    
 });
 
 Route::get('getStates/{id}',[CityController::class, 'getStates']);
