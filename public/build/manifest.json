@@ -1,11 +1,11 @@
 {
-  "public/images/sort_asc.png": {
-    "file": "assets/sort_asc.595704c3.png",
-    "src": "public/images/sort_asc.png"
-  },
   "public/images/sort_both.png": {
     "file": "assets/sort_both.3e016c23.png",
     "src": "public/images/sort_both.png"
+  },
+  "public/images/sort_asc.png": {
+    "file": "assets/sort_asc.595704c3.png",
+    "src": "public/images/sort_asc.png"
   },
   "public/images/sort_desc.png": {
     "file": "assets/sort_desc.d08ed0e2.png",
@@ -40,7 +40,7 @@
     ]
   },
   "resources/css/app.css": {
-    "file": "assets/app.c231ea57.css",
+    "file": "assets/app.a6ea5136.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },

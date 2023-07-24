@@ -97,7 +97,11 @@
                     </tr>
                     <tr class="border-b-2">
                         <th class="w-60">QR</th>
-                        <td class="px-4 ">{!! QrCode::size(100)->generate($model->qr) !!}</td>
+                        <td class="px-4 ">
+                            @if ($model->qr)
+                                {!! QrCode::size(100)->generate($model->qr) !!}
+                            @endif
+                        </td>
                     </tr>
                     <tr class="border-b-2">
                         <th class="w-60">Images</th>

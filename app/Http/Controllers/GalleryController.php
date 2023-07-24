@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Models\HomeImage;
+use App\Models\ItemImage;
 use App\Models\Item;
 use Image;
 
@@ -68,7 +68,7 @@ class GalleryController extends Controller
      */
     public function show($id)
     {
-        $model = HomeImage::findOrFail($id);
+        $model = Item::findOrFail($id);
         return view('admin.gallery.view', compact('model'));
     }
 
@@ -80,7 +80,7 @@ class GalleryController extends Controller
      */
     public function edit($id)
     {
-        $news = HomeImage::findOrFail($id);
+        $news = ItemImage::findOrFail($id);
         return view('admin.gallery.edit', compact('news'));
     }
 
@@ -97,8 +97,8 @@ class GalleryController extends Controller
             'title' => 'required',
             'image' => 'sometimes',
         ]);
-        $banner = HomeImage::find($id);
-        $banner->tittle = $request->title;
+        $gallery = ItemImage::find($id);
+        $gallery->tittle = $request->title;
         if($request->has('image')){
             $file = $request->image;
             $ext = $file->getClientOriginalExtension();
@@ -106,10 +106,10 @@ class GalleryController extends Controller
             $path = "product/".$fileName;
             $image = Image::make($file->getRealPath());
             $image->save($path);
-            $banner->image = asset($path);
-            $banner->name = $path;
+            $gallery->image = asset($path);
+            $gallery->name = $path;
         }
-        $banner->save();
+        $gallery->save();
         return redirect()->route('gallery');
     }
 

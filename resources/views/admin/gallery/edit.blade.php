@@ -4,7 +4,7 @@
         <span class="bi bi-bookmark-star-fill text-2xl"></span>
         <h2 class="text-xl">Banner</h2>
     </div>
-    <form action="{{ route('banners.update', $news->id) }}" method="post" enctype="multipart/form-data">
+    <form action="{{ route('gallery.update', $news->id) }}" method="post" enctype="multipart/form-data">
         @csrf
         @method('put')
         <div class="mt-4 bg-white">

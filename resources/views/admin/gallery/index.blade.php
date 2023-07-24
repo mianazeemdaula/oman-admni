@@ -37,12 +37,6 @@
                                 </td>
                                 <td class="flex space-x-1">
                                     <a href="{{ route('gallery.show', $item->id) }}"><span class="bi bi-eye"></span></a>
-                                    <a href="{{ route('gallery.edit', $item->id) }}"><span class="bi bi-pencil"></span></a>
-                                    <form action="{{ route('gallery.destroy', $item->id) }}" method="post">
-                                        @method('delete')
-                                        @csrf
-                                        <button type="submit"><span class="bi bi-trash"></span></button>
-                                    </form>
                                 </td>
                             </tr>
                         @endforeach
