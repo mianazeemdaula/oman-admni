@@ -134,7 +134,6 @@ class PendingCollectableController extends Controller
             ]);
             $response =  $response->json();
         }
-        return $response;
         return  redirect()->back()->with(['alert' => $response['success'] ?? false, 'message' => $response['message'] ]);
     }
 
