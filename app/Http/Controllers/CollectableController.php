@@ -17,7 +17,7 @@ class CollectableController extends Controller
     public function index()
     {
         // $collection = Item::where('special_item',2)->get();
-        $collection = Item::whereStatus('ACCEPTED')->get();
+        $collection = Item::where('special_item',1)->whereStatus('ACCEPTED')->get();
         return view('admin.collectables.index', compact('collection'));
     }
 
