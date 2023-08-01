@@ -96,7 +96,7 @@
     <script type="module">
         $(document).ready(function() {
             $('#dataTable').DataTable({
-                responsive:true,
+                responsive: true,
                 dom: 'Bfrtip',
                 buttons: [
                     'copy', 'csv', 'excel', 'pdf', 'print'
@@ -105,21 +105,21 @@
 
         });
 
-        $( document ).on( "click", "a.submitButton", function(){
-                Swal.fire({
-                    title: 'Reason',
-                    input: 'text',
-                    inputPlaceholder: 'Enter the reason',
-                    showCancelButton: true,
-                    confirmButtonText: 'Submit',
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        var $form = $(this).closest('form');
-                        var $input = $form.find('.reason');
-                        $input.val(result.value);
-                        $form.submit();
-                    }
-                });
+        $(document).on("click", "a.submitButton", function() {
+            Swal.fire({
+                title: 'Reason',
+                input: 'text',
+                inputPlaceholder: 'Enter the reason',
+                showCancelButton: true,
+                confirmButtonText: 'Submit',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    var $form = $(this).closest('form');
+                    var $input = $form.find('.reason');
+                    $input.val(result.value);
+                    $form.submit();
+                }
             });
+        });
     </script>
 @endsection
