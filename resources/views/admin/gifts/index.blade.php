@@ -9,6 +9,9 @@
             <h2 class="text-white">Gifts</h2>
             {{-- <a class="p-2 bg-white rounded-md text-xs" href="{{ route('sells.create') }}">Add Sell</a> --}}
         </div>
+        @if ($errors->any())
+            {{ implode('', $errors->all('<div>:message</div>')) }}
+        @endif
         <div class="px-4 pb-2">
             <div class="overflow-x-auto mt-2">
                 <table class="min-w-full divide-y divide-gray-200 table-striped table-bordered" id="dataTable">
@@ -16,14 +19,19 @@
                         <tr>
                             <th scope="col"
                                 class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                Name</th>
+                                From</th>
                             <th scope="col"
                                 class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                Item</th>
-
+                                To</th>
+                            <th scope="col"
+                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Type</th>
                             <th scope="col"
                                 class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                 Status</th>
+                            <th scope="col"
+                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Item</th>
                             <th scope="col"
                                 class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                 Action
@@ -36,16 +44,22 @@
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                     {{ $item->userFrom->name ?? ($item->organizationFrom->name ?? '') }}
                                 </td>
-
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                    {{ $item->userTo->name ?? ($item->organizationTo->name ?? '') }}
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                    {{ $item->type }}
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                    {{ $item->status }}
+                                </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                     @if ($item->item)
                                         {{ $item->item->common_name }}
                                     @endif
                                 </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                    {{ $item->status }}
-                                </td>
                                 <td class="flex space-x-1">
+                                    <a href="{{ route('sells.show', $item->id) }}"><span class="bi bi-eye"></span></a>
                                     <form action="{{ route('sells.update', $item->id) }}" method="post">
                                         @method('put')
                                         @csrf
@@ -78,14 +92,14 @@
     <script type="module">
         $(document).ready(function() {
             $('#dataTable').DataTable({
-                responsive:true,
+                responsive: true,
                 dom: 'Bfrtip',
                 buttons: [
                     'copy', 'csv', 'excel', 'pdf', 'print'
                 ]
             });
 
-            $( document ).on( "click", "a.submitButton", function(){
+            $(document).on("click", "a.submitButton", function() {
                 Swal.fire({
                     title: 'Reason',
                     input: 'text',

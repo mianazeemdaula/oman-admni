@@ -126,7 +126,7 @@ class ArchitecturalController extends Controller
     {
         if($request->has('status_ar')){
             $response = null;
-            if($request->status == 'accept'){    
+            if($request->status_ar == 'accept'){    
                 $response = \App\Helper\WebClient::post('building/accept',[
                     'id' => $id
                 ]);

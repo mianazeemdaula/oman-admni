@@ -121,7 +121,7 @@ class BannerController extends Controller
      */
     public function destroy($id)
     {
-        News::find($id)->delete();
+        HomeImage::find($id)->delete();
         return redirect()->back();
     }
 }

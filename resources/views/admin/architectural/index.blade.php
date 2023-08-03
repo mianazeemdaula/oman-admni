@@ -104,21 +104,22 @@
                                 <td class="px-6 py-4 whitespace-pre-wrap text-sm text-gray-500">{{ $item->location }}
                                 </td>
                                 <td class="flex space-x-1">
-                                    {{-- <a href="{{ route('buildings.show', $item->id) }}"><span class="bi bi-eye"></span></a>
-                                    <a href="{{ route('buildings.edit', $item->id) }}"><span
+                                    <a href="{{ route('architectural.show', $item->id) }}"><span
+                                            class="bi bi-eye"></span></a>
+                                    {{--    <a href="{{ route('buildings.edit', $item->id) }}"><span
                                             class="bi bi-pencil"></span></a>
                                     <form action="{{ route('buildings.destroy', $item->id) }}" method="post">
                                         @method('delete')
                                         @csrf
                                         <button type="submit"><span class="bi bi-trash"></span></button>
                                     </form> --}}
-                                    <form action="{{ route('buildings.update', $item->id) }}" method="post">
+                                    <form action="{{ route('architectural.update', $item->id) }}" method="post">
                                         @method('put')
                                         @csrf
                                         <input type="hidden" name="status_ar" value="accept">
                                         <button type="submit"><span class="bi bi-check"></span></button>
                                     </form>
-                                    <form action="{{ route('buildings.update', $item->id) }}" class="rejectForm"
+                                    <form action="{{ route('architectural.update', $item->id) }}" class="rejectForm"
                                         method="post">
                                         @method('put')
                                         @csrf
@@ -140,14 +141,14 @@
     <script type="module">
         $(document).ready(function() {
             $('#dataTable').DataTable({
-                responsive:true,
+                responsive: true,
                 dom: 'Bfrtip',
                 buttons: [
                     'copy', 'csv', 'excel', 'pdf', 'print'
                 ]
             });
 
-            $( document ).on( "click", "a.submitButton", function(){
+            $(document).on("click", "a.submitButton", function() {
                 Swal.fire({
                     title: 'Reason',
                     input: 'text',

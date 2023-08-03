@@ -18,7 +18,7 @@ class SellController extends Controller
     public function index()
     {
         $collection = Sell::whereStatus('PENDING')->whereType('طلب بيع')->get();
-        return view('admin.gifts.index', compact('collection'));
+        return view('admin.sells.index', compact('collection'));
     }
 
     /**
@@ -50,7 +50,7 @@ class SellController extends Controller
     public function show($id)
     {
         $model = Sell::findOrFail($id);
-        return view('admin.news.view', compact('model'));
+        return view('admin.sells.view', compact('model'));
     }
 
     /**

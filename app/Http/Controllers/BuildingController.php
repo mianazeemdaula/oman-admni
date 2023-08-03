@@ -18,7 +18,7 @@ class BuildingController extends Controller
      */
     public function index()
     {
-        $collection = Building::all();
+        $collection = Building::whereStatus('ACCEPTED')->get();
         return view('admin.buildings.index', compact('collection'));
     }
 

@@ -37,6 +37,9 @@ return [
     'user_name' => 'Username',   
     'organization_type' => 'Organization Type',   
     'name' => 'Name',   
+    'from' => 'From',   
+    'to' => 'To',   
+    'item_id' => 'Item',   
     'created_at' => 'Created At',   
     'updated_at' => 'Updated At',   
 ];
